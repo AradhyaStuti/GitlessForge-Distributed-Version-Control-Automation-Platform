@@ -26,15 +26,13 @@ npm install
 npm run dev
 
 Or run it with Docker:
-
 docker compose up --build
 
-
-What's in here:
+WHAT'S IN HERE:
 
 Version control: Repositories are stored using file snapshots and commit metadata. There is also a CLI with commands such as init, add, commit, branch, merge, diff, log, stash, and revert. The CLI uses yargs. Commit information is stored in MongoDB so it can also be displayed in the web application.
 
-Pull requests are branch-based and include reviews, status, and a merge flow.
+Pull requests: Pull requests are branch-based and include reviews, status, and a merge flow.
 
 Code review: There is a basic static analysis step that checks the diff for things like hardcoded secrets, unsafe calls such as eval, and some SQL-injection-related patterns. It is only a basic check and is not meant to replace a proper linter or security scanner.
 
@@ -44,7 +42,7 @@ Project boards: A Kanban-style board with tasks, priorities, assignees, and drag
 
 Authentication and other features: JWT authentication, bcrypt password hashing, rate limiting, request validation, Swagger API docs, Socket.IO for live updates, and API keys for programmatic access.
 
-Stack:
+STACK:
 React + Vite
 Node.js + Express
 MongoDB
@@ -52,7 +50,7 @@ Jest
 Docker Compose
 Socket.IO
 
-Tests:
+TESTS:
 cd backend-main
 npm test
 
@@ -61,7 +59,7 @@ npm test
 
 The backend has tests for authentication, repositories, pull requests, code review, pipelines, project boards, API keys, and middleware.
 
-Current status:
+CURRENT STATUS:
 
 The project works locally and with the Docker Compose setup.
 
