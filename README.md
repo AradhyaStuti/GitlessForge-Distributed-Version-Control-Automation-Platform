@@ -20,9 +20,7 @@ cp backend-main/.env.example backend-main/.env
 cd backend-main
 npm install
 npm start
-<<<<<<< HEAD
 ```
-
 In another terminal:
 
 ```bash
@@ -30,13 +28,6 @@ cd frontend-main
 npm install
 npm run dev
 ```
-
-Or run it with Docker:
-======================
-
-cd ../frontend-main
-npm install
-npm run dev
 
 Or run it with Docker:
 docker compose up --build
