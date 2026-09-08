@@ -1,4 +1,4 @@
-const { body, query } = require("express-validator");
+const { body } = require("express-validator");
 const { handleValidation } = require("./validate");
 
 const VALID_SCOPES = [
@@ -109,13 +109,6 @@ const reviewValidation = [
   handleValidation,
 ];
 
-const analyticsValidation = [
-  query("timeframe")
-    .optional()
-    .isIn(["day", "week", "month", "year"])
-    .withMessage("Timeframe must be 'day', 'week', 'month', or 'year'."),
-  handleValidation,
-];
 
 module.exports = {
   pipelineValidation,
@@ -124,5 +117,4 @@ module.exports = {
   cardValidation,
   apiKeyValidation,
   reviewValidation,
-  analyticsValidation,
 };

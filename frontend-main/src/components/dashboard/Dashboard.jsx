@@ -10,7 +10,6 @@ const Dashboard = () => {
   const [repositories, setRepositories] = useState([]);
   const [stats, setStats] = useState(null);
   const [feed, setFeed] = useState([]);
-  const [trending, setTrending] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const debouncedSearch = useDebounce(searchQuery, 300);
@@ -19,17 +18,15 @@ const Dashboard = () => {
     const controller = new AbortController();
     const fetchData = async () => {
       try {
-        const [userRepos, statsRes, feedRes, trendingRes] = await Promise.all([
+        const [userRepos, statsRes, feedRes] = await Promise.all([
           api.get(`/repo/user/${currentUser}`, { signal: controller.signal }).catch(() => ({ data: { repositories: [] } })),
           api.get("/stats", { signal: controller.signal }).catch(() => ({ data: null })),
           api.get("/feed?limit=6", { signal: controller.signal }).catch(() => ({ data: [] })),
-          api.get("/trending?limit=5", { signal: controller.signal }).catch(() => ({ data: [] })),
         ]);
         if (controller.signal.aborted) return;
         setRepositories(userRepos.data.repositories || []);
         setStats(statsRes.data);
         setFeed(Array.isArray(feedRes.data) ? feedRes.data : []);
-        setTrending(Array.isArray(trendingRes.data) ? trendingRes.data : []);
       } catch { /* ignored */ } finally { if (!controller.signal.aborted) setLoading(false); }
     };
     if (currentUser) fetchData();
@@ -73,9 +70,7 @@ const Dashboard = () => {
           {/* Quick nav */}
           <div className="dash-nav-row">
             <Link to="/create" className="dash-nav-item">+ New repo</Link>
-            <Link to="/snippets" className="dash-nav-item">Snippets</Link>
             <Link to="/explore" className="dash-nav-item">Explore</Link>
-            <Link to="/bookmarks" className="dash-nav-item">Bookmarks</Link>
           </div>
 
           <div className="dash-repos-card">
@@ -138,22 +133,6 @@ const Dashboard = () => {
               </ul>
             )}
           </div>
-
-          {trending.length > 0 && (
-            <div className="dash-card">
-              <h3 className="dash-card-title">Trending</h3>
-              <ul className="dash-trending">
-                {trending.map((repo) => (
-                  <li key={repo._id}>
-                    <Link to={`/repo/${repo._id}`} className="dash-trending-link">
-                      <span className="dash-trending-owner">{repo.owner?.username}/</span>
-                      <span className="dash-trending-name">{repo.name}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
         </aside>
       </div>
     </div>

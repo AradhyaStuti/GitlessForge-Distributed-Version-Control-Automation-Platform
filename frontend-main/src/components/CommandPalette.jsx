@@ -10,12 +10,7 @@ const COMMANDS = [
   { name: "Create Repository", path: "/create", icon: "repo", keys: "n" },
   { name: "Your Profile", path: "/profile", icon: "user", keys: "p" },
   { name: "Settings", path: "/settings", icon: "gear" },
-  { name: "Search", path: "/search", icon: "search", keys: "/" },
   { name: "Explore", path: "/explore", icon: "globe" },
-  { name: "Code Snippets", path: "/snippets", icon: "code" },
-  { name: "Create Snippet", path: "/snippets/new", icon: "plus" },
-  { name: "Bookmarks", path: "/bookmarks", icon: "bookmark" },
-  { name: "Admin Analytics", path: "/admin", icon: "chart" },
 ];
 
 const CommandPalette = () => {

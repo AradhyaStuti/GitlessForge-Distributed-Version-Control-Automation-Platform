@@ -118,12 +118,6 @@
 .dash-feed-msg { font-size: 0.72rem; color: var(--color-text-primary); display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .dash-feed-time { font-size: 0.62rem; color: var(--color-text-tertiary, var(--color-text-secondary)); }
 
-.dash-trending { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-.dash-trending-link { font-size: 0.76rem; text-decoration: none; }
-.dash-trending-link:hover { text-decoration: underline; }
-.dash-trending-owner { color: var(--color-text-secondary); }
-.dash-trending-name { color: var(--color-accent-brand); font-weight: 600; }
-
 /* ── Responsive ──────────────────────────────────────────── */
 @media screen and (max-width: 700px) {
   .dash-body { flex-direction: column; }

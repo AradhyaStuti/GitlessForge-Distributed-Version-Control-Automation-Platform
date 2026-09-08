@@ -1,27 +1,36 @@
 # Gitless Forge
 
-A side project where I tried to build a GitHub-style platform from scratch — including my own version control instead of wrapping Git.
+A side project where I tried to build a GitHub-style platform from scratch, including my own version control instead of using Git underneath.
 
-> **Not a Git wrapper.** Not built on libgit2. Not shelling out to the `git` binary. The version control here is implemented from scratch — file snapshots, commit metadata, branch tips, the lot.
+> **Not a Git wrapper.** Not built on libgit2 and not shelling out to the `git` binary. The version control part is implemented from scratch using file snapshots, commit metadata, branches, and related operations.
 
-It started because I wanted to understand what's actually happening when you run `git commit` or open a PR, so I built the pieces myself: file snapshots, branch state, a CI runner, code review, project boards.
+I started this project because I wanted to understand what actually happens behind commands like `git commit`, `git branch`, and the pull request workflow. So I built the main parts myself, including file snapshots, branch state, commits, a CI runner, code review, and project boards.
 
-Not production software. It's a learning project that turned into something I keep adding to.
+This is mainly a learning project, not production software. I'm still working on it and there are parts that need improvement.
 
 ## Running it
 
 ```bash
-git clone https://github.com/AradhyaStuti/Gitless-Forge-Distributed-Version-Control-Automation-Platform.git
-cd Gitless-Forge-Distributed-Version-Control-Automation-Platform
+git clone https://github.com/AradhyaStuti/GitlessForge-Distributed-Version-Control-Automation-Platform
+cd GitlessForge-Distributed-Version-Control-Automation-Platform
 
 cp backend-main/.env.example backend-main/.env
-# set MONGO_URI and JWT_SECRET in .env
+# add MONGO_URI and JWT_SECRET to .env
 
-cd backend-main && npm install && npm start
-cd ../frontend-main && npm install && npm run dev
+cd backend-main
+npm install
+npm start
 ```
 
-Or:
+In another terminal:
+
+```bash
+cd frontend-main
+npm install
+npm run dev
+```
+
+Or run it with Docker:
 
 ```bash
 docker compose up --build
@@ -29,31 +38,49 @@ docker compose up --build
 
 ## What's in here
 
-**The VCS part.** Repos are tracked as file snapshots with commit metadata. There's a CLI (`node index.js init`, `add`, `commit`, `branch`, `merge`, `diff`, `log`, `stash`, `revert`, …) wired through `yargs`. Commits get pushed to MongoDB so the web app can show history.
+**Version control.** Repositories are stored using file snapshots and commit metadata. There is also a CLI with commands such as `init`, `add`, `commit`, `branch`, `merge`, `diff`, `log`, `stash`, and `revert`. The CLI uses `yargs`. Commit information is stored in MongoDB so it can also be displayed in the web application.
 
-**Pull requests.** Branch-based, with review threads, status, and a merge flow.
+**Pull requests.** Branch-based pull requests with reviews, status, comments, and a merge flow.
 
-**Code review.** Static analysis pass over the diff that flags hardcoded secrets, unsafe function calls (`eval`, etc.), and a few SQL-injection-shaped patterns. Not a linter replacement — more of a sanity check.
+**Code review.** A basic static analysis step checks diffs for things like hardcoded secrets, unsafe calls such as `eval`, and some SQL-injection-related patterns. It is only a basic check and is not meant to replace a proper linter or security scanner.
 
-**CI/CD.** Pipelines run as Node child processes. Multi-stage steps, captured logs, exit codes, success rate per pipeline.
+**CI/CD.** Pipelines run Node processes and capture their output, exit codes, and results. Pipelines can also have multiple stages.
 
-**Project boards.** Kanban with drag-and-drop, priorities, assignees.
+**Project boards.** A Kanban-style board with tasks, priorities, assignees, and drag-and-drop support.
 
-**Auth and the rest.** JWT, bcrypt, rate limiting, request validation, swagger docs at `/api/v1/docs`, socket.io for live updates on PRs and boards, API keys for programmatic access.
+**Authentication and API access.** JWT authentication, bcrypt password hashing, rate limiting, request validation, Swagger API documentation, Socket.IO for live updates, and API keys for programmatic access.
 
 ## Stack
 
-React + Vite on the front. Node + Express + MongoDB on the back. Jest for tests. Docker Compose ties it together.
+* React + Vite
+* Node.js + Express
+* MongoDB
+* Jest
+* Docker Compose
+* Socket.IO
 
 ## Tests
 
+Backend:
+
 ```bash
-cd backend-main && npm test
-cd frontend-main && npm test
+cd backend-main
+npm test
 ```
 
-Backend has integration tests for auth, repos, PRs, code review, pipelines, project boards, API keys, and middleware. Most of the business logic is covered; UI tests are sparser.
+Frontend:
 
-## Status
+```bash
+cd frontend-main
+npm test
+```
 
-Works on my machine and the docker-compose setup. Some edges are rough — the merge logic doesn't handle three-way conflicts cleanly yet, and the diff view is line-based, not token-based. PRs welcome if anyone's actually reading this.
+The backend has tests for authentication, repositories, pull requests, code review, pipelines, project boards, API keys, and middleware.
+
+## Current status
+
+The project works locally and with the Docker Compose setup.
+
+There are still some rough parts. For example, the merge logic doesn't handle three-way conflicts properly yet, and the diff view is line-based rather than token-based.
+
+It's a learning project, so I'm still improving it.

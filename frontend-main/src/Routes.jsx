@@ -9,26 +9,17 @@ const Login = lazy(() => import("./components/auth/Login"));
 const Signup = lazy(() => import("./components/auth/Signup"));
 const CreateRepo = lazy(() => import("./components/repo/CreateRepo"));
 const RepoDetail = lazy(() => import("./components/repo/RepoDetail"));
-const SearchPage = lazy(() => import("./components/search/SearchPage"));
 const PullRequests = lazy(() => import("./components/pr/PullRequests"));
 const CreatePR = lazy(() => import("./components/pr/CreatePR"));
 const PRDetail = lazy(() => import("./components/pr/PRDetail"));
 const Settings = lazy(() => import("./components/settings/Settings"));
-const Snippets = lazy(() => import("./components/snippets/Snippets"));
-const CreateSnippet = lazy(() => import("./components/snippets/CreateSnippet"));
-const SnippetDetail = lazy(() => import("./components/snippets/SnippetDetail"));
 const Explore = lazy(() => import("./components/explore/Explore"));
-const Bookmarks = lazy(() => import("./components/bookmarks/Bookmarks"));
-const Admin = lazy(() => import("./components/admin/Admin"));
 const NotFound = lazy(() => import("./components/NotFound"));
 
 const PipelineDashboard = lazy(() => import("./components/pipeline/PipelineDashboard"));
 const CodeReviewPanel = lazy(() => import("./components/code-review/CodeReviewPanel"));
 const ProjectBoard = lazy(() => import("./components/board/ProjectBoard"));
-const AnalyticsDashboard = lazy(() => import("./components/analytics/AnalyticsDashboard"));
-const TrendingRepos = lazy(() => import("./components/trending/TrendingRepos"));
 const APIKeyManager = lazy(() => import("./components/api-keys/APIKeyManager"));
-const SecurityAuditLog = lazy(() => import("./components/audit/SecurityAuditLog"));
 const FileBrowser = lazy(() => import("./components/file-browser/FileBrowser"));
 
 function LoadingSpinner() {
@@ -75,23 +66,14 @@ const ProjectRoutes = () => {
     { path: "/repo/:repoId/pulls", element: <P><PullRequests /></P> },
     { path: "/repo/:repoId/pr/new", element: <P><CreatePR /></P> },
     { path: "/pr/:prId", element: <P><PRDetail /></P> },
-    { path: "/search", element: <P><SearchPage /></P> },
     { path: "/settings", element: <P><Settings /></P> },
-    { path: "/snippets", element: <P><Snippets /></P> },
-    { path: "/snippets/new", element: <P><CreateSnippet /></P> },
-    { path: "/snippet/:id", element: <P><SnippetDetail /></P> },
     { path: "/explore", element: <P><Explore /></P> },
-    { path: "/bookmarks", element: <P><Bookmarks /></P> },
-    { path: "/admin", element: <P><Admin /></P> },
 
     { path: "/repo/:repoId/pipelines", element: <P><PipelineDashboard /></P> },
-    { path: "/repo/:repoId/analytics", element: <P><AnalyticsDashboard /></P> },
     { path: "/repo/:repoId/boards", element: <P><ProjectBoard /></P> },
     { path: "/repo/:repoId/files", element: <P><FileBrowser /></P> },
     { path: "/pr/:prId/review", element: <P><CodeReviewPanel /></P> },
-    { path: "/trending", element: <P><TrendingRepos /></P> },
     { path: "/settings/api-keys", element: <P><APIKeyManager /></P> },
-    { path: "/settings/security-log", element: <P><SecurityAuditLog /></P> },
     { path: "*", element: <Suspense fallback={<LoadingSpinner />}><NotFound /></Suspense> },
   ]);
 };

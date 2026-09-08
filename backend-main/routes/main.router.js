@@ -5,22 +5,12 @@ const swaggerSpec = require("../config/swagger");
 const userRouter = require("./user.router");
 const repoRouter = require("./repo.router");
 const issueRouter = require("./issue.router");
-const socialRouter = require("./social.router");
-const notificationRouter = require("./notification.router");
 const prRouter = require("./pr.router");
-const snippetRouter = require("./snippet.router");
 const pipelineRouter = require("./pipeline.router");
 const codeReviewRouter = require("./codeReview.router");
 const projectBoardRouter = require("./projectBoard.router");
 const apiKeyRouter = require("./apiKey.router");
-const bookmarkRouter = require("./bookmark.router");
 const commentRouter = require("./comment.router");
-const analyticsRouter = require("./analytics.router");
-const auditLogRouter = require("./auditLog.router");
-
-const { search } = require("../controllers/searchController");
-const { searchRules } = require("../middleware/validate");
-const { cacheMiddleware } = require("../middleware/cache");
 
 const mainRouter = express.Router();
 
@@ -47,8 +37,6 @@ mainRouter.get("/health", (req, res) => {
   });
 });
 
-mainRouter.get("/search", cacheMiddleware(30000), searchRules, search);
-
 mainRouter.use(userRouter);
 mainRouter.use(repoRouter);
 mainRouter.use(issueRouter);
@@ -57,12 +45,6 @@ mainRouter.use(pipelineRouter);
 mainRouter.use(codeReviewRouter);
 mainRouter.use(projectBoardRouter);
 mainRouter.use(apiKeyRouter);
-mainRouter.use(socialRouter);
-mainRouter.use(notificationRouter);
-mainRouter.use(snippetRouter);
-mainRouter.use(bookmarkRouter);
 mainRouter.use(commentRouter);
-mainRouter.use(analyticsRouter);
-mainRouter.use(auditLogRouter);
 
 module.exports = mainRouter;
