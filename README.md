@@ -28,9 +28,11 @@ npm run dev
 Or run it with Docker:
 
 docker compose up --build
-What's in here
 
-Version control. Repositories are stored using file snapshots and commit metadata. There is also a CLI with commands such as init, add, commit, branch, merge, diff, log, stash, and revert. The CLI uses yargs. Commit information is stored in MongoDB so it can also be displayed in the web application.
+
+What's in here:
+
+Version control: Repositories are stored using file snapshots and commit metadata. There is also a CLI with commands such as init, add, commit, branch, merge, diff, log, stash, and revert. The CLI uses yargs. Commit information is stored in MongoDB so it can also be displayed in the web application.
 
 Pull requests are branch-based and include reviews, status, and a merge flow.
 
